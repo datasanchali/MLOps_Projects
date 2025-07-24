@@ -36,7 +36,7 @@ docker build -t custom-mlflow .
 This will create a Docker image named custom-mlflow that runs the MLflow server.
 
 Run MLFlow server
-docker run -p 5000:5000 -v $(pwd)/mlruns:/mlruns custom-mlflow
+docker run -p 5050:5000 -v $(pwd)/mlruns:/mlruns custom-mlflow
 
 Open Mlflow
 Go to:
