@@ -1,0 +1,58 @@
+🔧 1. Install and Run
+
+Install Docker Desktop: https://docs.docker.com/engine/install/
+Open the Docker Desktop app to make sure it’s running.
+Check in terminal:
+
+docker --version
+
+📂 2. Create a Working Directory
+
+On Terminal:
+mkdir -p ~/mlflow-docker/mlruns
+cd ~/mlflow-docker
+touch Dockerfile
+
+Then open and edit the Dockerfile:
+open -a TextEdit Dockerfile
+
+Paste this into it:
+FROM python:3.9
+
+RUN pip install mlflow
+
+EXPOSE 5000
+
+ENTRYPOINT ["mlflow", "server", "--host", "0.0.0.0", \
+            "--port", "5000", \
+            "--backend-store-uri", "sqlite:///mlflow.db", \
+            "--default-artifact-root", "/mlruns"]
+
+Save and Close.
+
+Build docker image:
+docker build -t custom-mlflow .
+
+This will create a Docker image named custom-mlflow that runs the MLflow server.
+
+Run MLFlow server
+docker run -p 5000:5000 -v $(pwd)/mlruns:/mlruns custom-mlflow
+
+Open Mlflow
+Go to:
+
+📍 http://localhost:5000
+
+You're all set!! 
+
+
+
+
+
+
+
+
+
+
+
+
